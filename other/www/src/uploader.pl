@@ -1,9 +1,10 @@
-#!/usr/bin/perl -wT
+#!/usr/bin/perl -w
 
 use strict;
 use CGI qw(:standard);
 use CGI::Carp qw(warningsToBrowser fatalsToBrowser);
 use File::Basename;
+use Archive::Extract;
 
 my $upload_dir = "/opt/Streamer";
 my $updateTar = param('roonUpdate');
@@ -38,10 +39,13 @@ close UPLOADFILE or die "Couldn't close destination file.";
 
 print "File written to " . $upload_dir . "/" . $filename . ".tar.gz<br>";
 print "Unpacking files<br>";
-system ("/opt/Streamer/unpackUpdate.sh");
+my $tarball = Archive::Extract->new( archive => "$upload_dir/$filename.tar.gz" );
+my $untar = $tarball->extract( to => '/opt/Streamer' ) or die $tarball->error;
 
-print $?;
-print "Done.";
+#system ("/bin/bash -xc /opt/Streamer/unpackUpdate.sh");
+#print $? >> 8;
+
+print "Done.<br> Please reboot your system. <br>";
 
 print "<a href=\"../index.aevee.html\" title=\"Return to Streamer Homepage\">Home</a><br>";
-print end_html
+print end_html;
