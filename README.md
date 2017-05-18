@@ -15,3 +15,4 @@ Contains:
   shell script service to update Roon Ready app and files
   
 NOTE, the updater needs 4755 permissions (-rwsr-xr-x) and root ownership to function, but git does not preserve the setuid bit
+NOTE, git's umask will change 0666 and 0777 permissions to 0664 and 0775, respectively.  Rather than remove the umask, it's safer to just change the permissions myself on the update packages
