@@ -19,7 +19,7 @@ if (!$updateTar) {
 my ($filename) = fileparse($updateTar);
 print "Uploaded " . $filename . "<br>";
 
-if ($filename =~ m/(RoonUpdate)-[0-9]{2}\.[0-9]{2})/) {
+if ($filename =~ m/(RoonUpdate)-[0-9]{2}\.[0-9]{2}/) {
   $filename = $1;
 } else {
   die "Filename contains invalid characters.";
@@ -36,14 +36,12 @@ while (<$upload_filehandle>) {
 
 close UPLOADFILE or die "Couldn't close destination file.";
 
-print "File written to " . $upload_dir . "/" . $filename . "<br>";
+print "File written to " . $upload_dir . "/" . $filename . ".tar.gz<br>";
 print "Unpacking files<br>";
 system ("/opt/Streamer/unpackUpdate.sh");
 
 print $?;
 print "Done.";
 
-print Link({-rel=>'Return to Streamer Homepage',
-            -href=>'../index.aevee.html'});
-# print "<a href=\"../index.aevee.html\" title=\"Return to Streamer Homepage\">Home</a><br>";
+print "<a href=\"../index.aevee.html\" title=\"Return to Streamer Homepage\">Home</a><br>";
 print end_html
