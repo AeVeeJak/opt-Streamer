@@ -27,7 +27,7 @@ if ($filename =~ m/(RoonUpdate)-[0-9]{2}\.[0-9]{2})/) {
 
 my $upload_filehandle = upload("roonUpdate");
 
-open (UPLOADFILE, ">", "$upload_dir/$filename") or die "Couldn't open destination file.";
+open (UPLOADFILE, ">", "$upload_dir/$filename.tar.gz") or die "Couldn't open destination file.";
 binmode UPLOADFILE;
 
 while (<$upload_filehandle>) {
