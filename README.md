@@ -14,3 +14,4 @@ Contains:
   a copy of the /var/www/ dir
   shell script service to update Roon Ready app and files
   
+NOTE, the updater needs 4755 permissions (-rwsr-xr-x) and root ownership to function, but git does not preserve the setuid bit
